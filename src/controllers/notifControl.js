@@ -4,8 +4,8 @@ import mitransNotif from "../configurations/payment/midtrans.js";
 class NotifControl {
   static async addNotif(req, res) {
     try {
-      const statusResponse = await apiClient.transaction.notification(
-        notificationJson
+      const statusResponse = await mitransNotif.transaction.notification(
+        req.body
       );
 
       let orderId = statusResponse.order_id;
@@ -15,7 +15,7 @@ class NotifControl {
       const insert = new Notif({
         order_id: orderId,
         name: req.body.name,
-        status : transactionStatus,
+        status: transactionStatus,
         responseMidtrans: statusResponse,
       });
 

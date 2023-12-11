@@ -12,12 +12,15 @@ class NotifControl {
       let transactionStatus = statusResponse.transaction_status;
       let fraudStatus = statusResponse.fraud_status;
 
-      const insert = new Notif({
-        order_id: orderId,
-        name: req.body.name,
-        status: transactionStatus,
-        responseMidtrans: JSON.stringify(statusResponse),
-      });
+      const insert = Notif.updateOne(
+        {
+          order_id: orderId,
+        },
+        {
+          status: transactionStatus,
+          responseMidtrans: JSON.stringify(statusResponse),
+        }
+      );
 
       await insert.save();
 

@@ -12,7 +12,7 @@ class NotifControl {
       let transactionStatus = statusResponse.transaction_status;
       let fraudStatus = statusResponse.fraud_status;
 
-      const insert = Notif.updateOne(
+      await Notif.updateOne(
         {
           order_id: orderId,
         },
@@ -21,8 +21,6 @@ class NotifControl {
           responseMidtrans: JSON.stringify(statusResponse),
         }
       );
-
-      await insert.save();
 
       res.send("berhasil");
     } catch (err) {

@@ -16,7 +16,7 @@ class NotifControl {
         order_id: orderId,
         name: req.body.name,
         status: transactionStatus,
-        responseMidtrans: statusResponse,
+        responseMidtrans: JSON.stringify(statusResponse),
       });
 
       await insert.save();

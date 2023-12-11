@@ -1,12 +1,17 @@
 import express from "express";
-import handleError from "./middlewares/handleError.js";
 import mongoose from "mongoose";
-import notif from "./routers/notif.js";
 import dotenv from "dotenv";
 dotenv.config();
 
 // connection
 mongoose.connect(process.env.DB);
+
+// middleware
+import handleError from "./middlewares/handleError.js";
+
+// router
+import notif from "./routers/notif.js";
+import home from "./routers/home.js";
 
 const con = mongoose.connection;
 con.on("err", (err) => console.log(err));
@@ -16,5 +21,6 @@ const app = express();
 app.use(express.json());
 
 app.use(notif);
+app.use(home);
 app.use(handleError);
 export default app;

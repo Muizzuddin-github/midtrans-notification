@@ -1,5 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
+import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -18,6 +19,7 @@ con.on("err", (err) => console.log(err));
 con.once("open", () => console.log("database terhubung"));
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 app.use(notif);
